@@ -23,7 +23,7 @@ class MoneyTest {
 	}
 }
 
-abstract class Money {
+class Money {
 	protected int amount;
 	protected String currency;
 	
@@ -37,7 +37,9 @@ abstract class Money {
 		return amount == money.amount && getClass().equals(money.getClass());
 	}
 	
-	abstract Money times(int multiplier);
+	Money times(int multiplier) {
+		return null;
+	}
 
 	static Money dollar(int amount) {
 		return new Dollar(amount, "USD");
@@ -50,6 +52,10 @@ abstract class Money {
 	String currency() {
 		return currency;
 	}
+	
+	public String toString() {
+		return amount + " " + currency;
+	}
 }
 
 class Dollar extends Money {
@@ -58,7 +64,7 @@ class Dollar extends Money {
 	}
 	
 	Money times(int multiplier) {
-		return Money.dollar(amount * multiplier);
+		return new Money(amount * multiplier, currency);
 	}
 }
 
@@ -68,7 +74,7 @@ class Franc extends Money{
 	}
 	
 	Money times(int multiplier) {
-		return Money.franc(amount * multiplier);
+		return new Money(amount * multiplier, currency);
 	}
 }
 
